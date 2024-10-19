@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { fetchRooms } from '../../backend/appwrite';
+import useTitle from '../../shared/useTitle/useTitle';
 
 const RoomsMap = () => {
+  useTitle('Rooms-Map')
   const [roomsData, setRoomsData] = useState({ floors: [] }); // Initial state with floors as an empty array
   const [loading, setLoading] = useState(true);
   const [selectedRoom, setSelectedRoom] = useState(null);

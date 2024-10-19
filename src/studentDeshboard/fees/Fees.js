@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useTitle from '../../shared/useTitle/useTitle';
 
 const studentsData = [
   {
@@ -26,6 +27,7 @@ const studentsData = [
 ];
 
 const Fees = () => {
+  useTitle('Your Fees')
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedFeeType, setSelectedFeeType] = useState(''); // 'Hostel Fee' or 'Meal Fee'
   const [selectedMonth, setSelectedMonth] = useState(''); // The selected month for payment

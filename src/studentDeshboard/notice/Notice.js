@@ -3,9 +3,11 @@ import { fetchNotices, fetchNoticeImage } from "../../backend/appwrite";
 import Noticecard from "./Noticecard";
 import NoticeModal from "./NoticeModal";
 import Loading from "../../shared/loading/Loading";
+import useTitle from "../../shared/useTitle/useTitle";
 
 
 const Notice = () => {
+  useTitle('Notice')
   const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedNotice, setSelectedNotice] = useState(null); // State to track the selected notice

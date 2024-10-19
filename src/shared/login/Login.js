@@ -8,7 +8,7 @@ import { loginUser, getUserRoleInTeam, checkUserProfileExists, account } from ".
 import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
-    useTitle("Login");
+    useTitle("Log-In");
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { fetchUser } = useContext(AuthContext);
     const location = useLocation();

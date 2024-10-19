@@ -8,9 +8,11 @@ import {
   changeUserPassword,
   uploadPhoto,
   deletePhoto,
-} from "../../backend/appwrite"; // Import backend services
+} from "../../backend/appwrite";
+import useTitle from '../../shared/useTitle/useTitle';
 
 const StudentProfile = () => {
+   useTitle('Profile')
   const [userData, setUserData] = useState({
     name: "",
     photo: "",

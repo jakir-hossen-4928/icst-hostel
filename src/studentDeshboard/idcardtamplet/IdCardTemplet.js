@@ -4,7 +4,9 @@ import { useSwipeable } from 'react-swipeable';
 import { getUserData } from '../../backend/appwrite';
 import Loading from '../../shared/loading/Loading';
 
+
 const IdCardTemplate = () => {
+
   const [viewQRCode, setViewQRCode] = useState(false);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);

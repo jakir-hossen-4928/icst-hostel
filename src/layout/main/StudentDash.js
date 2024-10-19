@@ -19,7 +19,7 @@ const StudentDash = () => {
     { name: "Notice Board", path: "/studentdashboard/notice-board", icon: faBell },
     { name: "Feedback", path: "/studentdashboard/advice-complain", icon: faComments },
     { name: "Hostel & Meal Fee", path: "/studentdashboard/fees", icon: faMoneyBillWave },
-    { name: "Profile Settings", path: "/studentdashboard/profile", icon: faUser },
+    { name: "Profile", path: "/studentdashboard/profile", icon: faUser },
   ];
 
   // Fetch user data from Appwrite on component mount

@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import SearchstudentCard from "./SearchstudentCard";
 import { searchStudents } from "../../backend/appwrite";
+import useTitle from "../../shared/useTitle/useTitle";
 
 const SearchStudentInfo = () => {
+    useTitle('Student')
     const [searchQuery, setSearchQuery] = useState("");        // The current search query
     const [searchResults, setSearchResults] = useState([]);    // The loaded students
     const [isLoading, setIsLoading] = useState(false);         // Loading state

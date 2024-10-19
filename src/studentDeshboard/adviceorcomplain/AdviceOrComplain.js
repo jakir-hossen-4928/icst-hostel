@@ -12,8 +12,10 @@ import {
 } from "../../backend/appwrite";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useTitle from "../../shared/useTitle/useTitle";
 
 const AdviceOrComplain = () => {
+  useTitle('Submit Feedbeak')
   const [activeTab, setActiveTab] = useState("pending");
   const [description, setDescription] = useState("");
   const [dateTime, setDateTime] = useState("");

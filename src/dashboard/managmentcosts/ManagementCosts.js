@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { getManagementCosts } from "../../backend/appwrite";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import useTitle from "../../shared/useTitle/useTitle";
 
 const ManagementCosts = () => {
+  useTitle('Management-Costs')
   const [selectedId, setSelectedId] = useState(null);
   const [managementData, setManagementData] = useState([]); // Initialize as an array
   const [allData, setAllData] = useState([]); // Store all fetched data

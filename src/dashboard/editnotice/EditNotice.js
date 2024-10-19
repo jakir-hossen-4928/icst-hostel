@@ -3,8 +3,10 @@ import { fetchNotices } from "../../backend/appwrite"; // Import fetchNotices fu
 import EditnoticeCard from './EditnoticeCard';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import { toast } from 'react-hot-toast';
+import useTitle from '../../shared/useTitle/useTitle';
 
 const EditNotice = () => {
+  useTitle('Edit Notice')
   const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate(); // Initialize navigate for navigation

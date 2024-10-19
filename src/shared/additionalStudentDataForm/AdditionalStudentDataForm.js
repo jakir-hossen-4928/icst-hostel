@@ -8,8 +8,10 @@ import {
   fetchRooms,
   account,
 } from "../../backend/appwrite";
+import useTitle from "../useTitle/useTitle";
 
 const AdditionalStudentDataForm = () => {
+  useTitle('Submit Student Data');
   const navigate = useNavigate();
   const [photo, setPhoto] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,11 +28,26 @@ const AdditionalStudentDataForm = () => {
 
   const institutes = [
     { value: "Feni Computer Institute", label: "Feni Computer Institute" },
-    { value: "Feni Polytechnic Institute", label: "Feni Polytechnic Institute" },
-    { value: "Institute Of Computer Science And Technology (ICST)", label: "Institute Of Computer Science And Technology (ICST)" },
-    { value: "Compact Polytechnic Institute", label: "Compact Polytechnic Institute" },
-    { value: "Feni Ideal Polytechnic Institute - FIPI", label: "Feni Ideal Polytechnic Institute - FIPI" },
-    { value: "Feni Government Technical School and College", label: "Feni Government Technical School and College" },
+    {
+      value: "Feni Polytechnic Institute",
+      label: "Feni Polytechnic Institute",
+    },
+    {
+      value: "Institute Of Computer Science And Technology (ICST)",
+      label: "Institute Of Computer Science And Technology (ICST)",
+    },
+    {
+      value: "Compact Polytechnic Institute",
+      label: "Compact Polytechnic Institute",
+    },
+    {
+      value: "Feni Ideal Polytechnic Institute - FIPI",
+      label: "Feni Ideal Polytechnic Institute - FIPI",
+    },
+    {
+      value: "Feni Government Technical School and College",
+      label: "Feni Government Technical School and College",
+    },
   ];
 
   // Fetch available rooms when the form loads
@@ -148,21 +165,30 @@ const AdditionalStudentDataForm = () => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className="max-w-md mx-auto lg:max-w-lg lg:mx-auto p-6 m-4 bg-gray-100 rounded-lg shadow-lg space-y-4">
+    <form
+      onSubmit={handleFormSubmit}
+      className="max-w-md mx-auto lg:max-w-lg lg:mx-auto p-6 m-4 bg-gray-100 rounded-lg shadow-lg space-y-4"
+    >
       <h2 className="text-2xl font-semibold mb-4 text-center text-gray-800">
         Additional Student Data
       </h2>
 
       {/* Room Selection */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Room Number</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Room Number
+        </label>
         <Select
           options={availableRooms.map((room) => ({
             value: room.room_number,
             label: `Room ${room.room_number}`,
           }))}
-          onChange={(selectedOption) => setFormData({ ...formData, roomNumber: selectedOption?.value })}
-          className={`mt-1 ${!formData.roomNumber ? "border-red-600" : "border-gray-300"} rounded-md`}
+          onChange={(selectedOption) =>
+            setFormData({ ...formData, roomNumber: selectedOption?.value })
+          }
+          className={`mt-1 ${
+            !formData.roomNumber ? "border-red-600" : "border-gray-300"
+          } rounded-md`}
           placeholder="Select Room"
           menuPortalTarget={document.body}
           menuPosition="fixed"
@@ -185,27 +211,39 @@ const AdditionalStudentDataForm = () => {
 
       {/* Institute Selection */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Institute</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Institute
+        </label>
         <Select
           options={institutes}
-          onChange={(selectedOption) => setFormData({ ...formData, institute: selectedOption.value })}
-          className={`mt-1 ${!formData.institute ? "border-red-600" : "border-gray-300"} rounded-md`}
+          onChange={(selectedOption) =>
+            setFormData({ ...formData, institute: selectedOption.value })
+          }
+          className={`mt-1 ${
+            !formData.institute ? "border-red-600" : "border-gray-300"
+          } rounded-md`}
           placeholder="Select your Institute"
         />
       </div>
 
       {/* Contact Number Input */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Number</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Number
+        </label>
         <div className="flex items-center mt-1 w-full">
-          <span className="bg-gray-200 rounded-l-md px-3 py-2 text-gray-700">+880</span>
+          <span className="bg-gray-200 rounded-l-md px-3 py-2 text-gray-700">
+            +880
+          </span>
           <input
             type="text"
             name="contactNumber"
             value={formData.contactNumber}
             onChange={handleInputChange}
             placeholder="Enter Contact Number"
-            className={`border ${!formData.contactNumber ? "border-red-600" : "border-gray-300"} rounded-r-md p-2 w-full`}
+            className={`border ${
+              !formData.contactNumber ? "border-red-600" : "border-gray-300"
+            } rounded-r-md p-2 w-full`}
           />
         </div>
       </div>
@@ -223,30 +261,35 @@ const AdditionalStudentDataForm = () => {
         </div>
       </div>
 
-     {/* Semester Selection */}
-<div className="mb-4">
-  <label className="block text-sm font-medium text-gray-700">Semester</label>
-  <Select
-    options={[
-      { value: 1, label: "Semester 1" },
-      { value: 2, label: "Semester 2" },
-      { value: 3, label: "Semester 3" },
-      { value: 4, label: "Semester 4" },
-      { value: 5, label: "Semester 5" },
-      { value: 6, label: "Semester 6" },
-      { value: 7, label: "Semester 7" },
-      { value: 8, label: "Semester 8" },
-    ]}
-    onChange={(selectedOption) =>
-      setFormData({ ...formData, semester: selectedOption.value })
-    }
-    className={`mt-1 ${!formData.semester ? "border-red-600" : "border-gray-300"} rounded-md`}
-    placeholder="Select Semester"
-    menuPlacement="top"  // Set dropdown to open upwards
-  />
-  {!formData.semester && <p className="text-red-600 text-sm">Semester selection is required</p>}
-</div>
-
+      {/* Semester Selection */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">
+          Semester
+        </label>
+        <Select
+          options={[
+            { value: 1, label: "Semester 1" },
+            { value: 2, label: "Semester 2" },
+            { value: 3, label: "Semester 3" },
+            { value: 4, label: "Semester 4" },
+            { value: 5, label: "Semester 5" },
+            { value: 6, label: "Semester 6" },
+            { value: 7, label: "Semester 7" },
+            { value: 8, label: "Semester 8" },
+          ]}
+          onChange={(selectedOption) =>
+            setFormData({ ...formData, semester: selectedOption.value })
+          }
+          className={`mt-1 ${
+            !formData.semester ? "border-red-600" : "border-gray-300"
+          } rounded-md`}
+          placeholder="Select Semester"
+          menuPlacement="top" // Set dropdown to open upwards
+        />
+        {!formData.semester && (
+          <p className="text-red-600 text-sm">Semester selection is required</p>
+        )}
+      </div>
 
       <button
         type="submit"

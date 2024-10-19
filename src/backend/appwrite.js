@@ -366,12 +366,21 @@ export const uploadPhoto = async (photo) => {
 export const storeStudentData = async (studentData) => {
     try {
         console.log("Student Data to be stored:", studentData);
-        const response = await databases.createDocument(databaseId, studentsCollectionId,
+
+        // Pass either photo URL or file ID depending on your schema
+        const studentDataToStore = {
+            ...studentData,
+            photo: studentData.photo.url,  // Store the URL of the photo (or use .fileId if needed)
+        };
+
+        const response = await databases.createDocument(
+            databaseId,
+            studentsCollectionId,
             ID.unique(),
-            studentData,
+            studentDataToStore,  // Pass the updated studentData
             [
-                Permission.write(Role.user(studentData.userId)), // Give write permission to the logged-in user
-                Permission.read(Role.any()) // Optional: Set this if anyone should read the document
+                Permission.write(Role.user(studentData.userId)),  // Write permission for user
+                Permission.read(Role.any()),  // Optional: Read permission for anyone
             ]
         );
 
@@ -380,6 +389,7 @@ export const storeStudentData = async (studentData) => {
         throw new Error('Failed to store student data: ' + error.message);
     }
 };
+
 export const checkUserProfileExists = async (userId) => {
     try {
         const response = await databases.listDocuments(

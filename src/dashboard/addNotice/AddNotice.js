@@ -2,8 +2,10 @@
   import { createNotice } from "../../backend/appwrite"; // Import the createNotice function
   import { toast } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
+import useTitle from '../../shared/useTitle/useTitle';
 
   const AddNotice = ({ onNoticePost }) => {
+     useTitle('Add Notice');
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState(""); // Field for notice category

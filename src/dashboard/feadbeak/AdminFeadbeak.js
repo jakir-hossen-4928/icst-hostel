@@ -4,8 +4,10 @@ import { faClock, faPaperPlane, faCheckCircle, faTrash } from '@fortawesome/free
 import { fetchFeedback, resolveFeedback, deleteFeedback } from '../../backend/appwrite';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useTitle from '../../shared/useTitle/useTitle';
 
 const AdminFeedback = () => {
+  useTitle('Submitted Feedback')
   const [activeTab, setActiveTab] = useState('advice');
   const [feedbackData, setFeedbackData] = useState([]);
   const [loading, setLoading] = useState(false);

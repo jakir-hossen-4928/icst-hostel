@@ -5,8 +5,10 @@ import MessageModal from "./MessageModal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../../shared/loading/Loading";
+import useTitle from "../../shared/useTitle/useTitle";
 
 const ContactList = () => {
+  useTitle('Contact-List')
   const [contacts, setContacts] = useState([]);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [loading, setLoading] = useState(true); // State to manage loading
