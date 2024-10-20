@@ -66,7 +66,7 @@ const Fees = () => {
 
   return (
     <div className="container mx-auto p-6 bg-gray-50">
-      <h1 className="text-5xl font-bold text-center text-indigo-700 mb-10">Your Hostel and Meal Fees</h1>
+   
 
       {studentsData.map((student) => (
         <div key={student.student_id} className="bg-white shadow-md rounded-lg mb-8 p-6 transition-all duration-300 hover:shadow-lg">

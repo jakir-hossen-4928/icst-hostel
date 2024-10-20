@@ -337,59 +337,32 @@ export const fetchRooms = async (offset = 0, limit = 100) => {
         throw error;
     }
 };
-//upload photo in student photo bucket
-export const uploadPhoto = async (photo) => {
-    try {
-      const fileId = ID.unique(); // Generate a unique file ID
-      const file = await storage.createFile(studentImagesBucketId, fileId, photo);
-      const photoUrl = `https://cloud.appwrite.io/v1/storage/buckets/${studentImagesBucketId}/files/${fileId}/view?project=${process.env.REACT_APP_APPWRITE_PROJECT_ID}`;
-
-      return {
-        fileId: file.$id,
-        url: photoUrl,  // Return the file URL
-      };
-    } catch (error) {
-      throw new Error('Photo upload failed: ' + error.message);
-    }
-  };
-// delete photo from student photo bucket
-  export const deletePhoto = async (photoId) => {
-    try {
-      await storage.deleteFile(studentImagesBucketId, photoId);
-      console.log(`Deleted photo with ID: ${photoId}`);
-    } catch (error) {
-      throw new Error('Failed to delete the previous photo: ' + error.message);
-    }
-  };
-
 // Store student data in the students collection
 export const storeStudentData = async (studentData) => {
     try {
-        console.log("Student Data to be stored:", studentData);
+      console.log("Student Data to be stored:", studentData);
 
-        // Pass either photo URL or file ID depending on your schema
-        const studentDataToStore = {
-            ...studentData,
-            photo: studentData.photo.url,  // Store the URL of the photo (or use .fileId if needed)
-        };
+      const studentDataToStore = {
+        ...studentData,
+        photo: studentData.photo, // Store the photo URL directly
+      };
 
-        const response = await databases.createDocument(
-            databaseId,
-            studentsCollectionId,
-            ID.unique(),
-            studentDataToStore,  // Pass the updated studentData
-            [
-                Permission.write(Role.user(studentData.userId)),  // Write permission for user
-                Permission.read(Role.any()),  // Optional: Read permission for anyone
-            ]
-        );
+      const response = await databases.createDocument(
+        databaseId,
+        studentsCollectionId,
+        ID.unique(),
+        studentDataToStore,
+        [
+          Permission.write(Role.user(studentData.userId)), // Write permission for the user
+          Permission.read(Role.any()), // Read permission for anyone (optional)
+        ]
+      );
 
-        return response;
+      return response;
     } catch (error) {
-        throw new Error('Failed to store student data: ' + error.message);
+      throw new Error('Failed to store student data: ' + error.message);
     }
-};
-
+  };
 export const checkUserProfileExists = async (userId) => {
     try {
         const response = await databases.listDocuments(
@@ -403,7 +376,6 @@ export const checkUserProfileExists = async (userId) => {
         throw new Error('Failed to check user profile existence: ' + error.message);
     }
 };
-
 export const searchStudents = async (searchQuery = "", limit = 100, offset = 0) => {
     try {
         const queries = [];
@@ -487,6 +459,8 @@ export const getUserData = async () => {
             studentId: userDetails.studentId,  // Student ID
             institute: userDetails.institute,  // Institute
             number: userDetails.number,        // Contact number
+            fatherNumber: userDetails.fatherNumber,
+            motherNumber: userDetails.motherNumber,
             semester: userDetails.semester,    // Semester
             userId: userDetails.userId,        // User ID (same as userId fetched from account)
             photo: userDetails.photo,          // Photo URL
@@ -772,6 +746,10 @@ export const validateProfileData = (data) => {
     // Additional validation can be added as per requirements
     return true;
 };
+
+
+
+
 
 
 
