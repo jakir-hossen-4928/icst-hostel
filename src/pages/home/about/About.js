@@ -6,11 +6,11 @@ const About = () => {
     <section className="p-4 lg:p-8 bg-gradient-to-r from-indigo-500 to-blue-500  text-gray-900">
       <div className="container mx-auto space-y-12">
         <div className="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row">
-          <img
-            src="https://i.ibb.co.com/wC5twVN/382789558-901791315280833-6831072150464231892-n.jpg"
+          {/* <img
+            src="https://ibb.co.com/gT773yf"
             alt=""
             className="h-80  bg-gray-500 aspect-video lg:hidden"
-                      />
+                      /> */}
           <div className="flex flex-col justify-center flex-1 p-6 bg-gray-50">
             <span className="text-xs uppercase text-gray-600"> </span>
             <h3 className="text-3xl font-bold">
@@ -91,13 +91,13 @@ const About = () => {
             </p>
 
 
-            <Link
+            {/* <Link
               to="/apply"
               type="button"
               className="self-end btn btn-primary"
             >
               Apply Now
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

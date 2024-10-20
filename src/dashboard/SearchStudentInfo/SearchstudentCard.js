@@ -2,14 +2,16 @@ import React from "react";
 
 const SearchstudentCard = ({ card }) => {
   const {
-    name,         // Student's name
-    email,        // Student's email
-    studentId,    // Student's ID
-    photo,        // URL to student's photo
-    room,         // Student's room number
-    institute,    // Institute name
-    semester,     // Semester number
-    number        // Student's contact number
+    name,         
+    email,
+    studentId,
+    photo,
+    room,
+    institute,
+    semester,
+    number ,
+    motherNumber,
+    fatherNumber
   } = card;
 
   return (
@@ -38,6 +40,14 @@ const SearchstudentCard = ({ card }) => {
           <p className="mb-1">
             <span className="font-medium">Phone Number: </span>
             {number}
+          </p>
+          <p className="mb-1">
+            <span className="font-medium">Father's Number: </span>
+            {fatherNumber}
+          </p>
+          <p className="mb-1">
+            <span className="font-medium">Mother's Number: </span>
+            {motherNumber}
           </p>
           <p className="mb-1">
             <span className="font-medium">Room Number: </span>

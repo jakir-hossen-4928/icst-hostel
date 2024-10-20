@@ -9,13 +9,50 @@ import useTitle from "../useTitle/useTitle";
 
 const imageHostKey = '8214c397d8d128581e7bb4f84f230a86';
 
+  // Room number options
+  const roomOptions = [
+    { value: 202, label: "Room 202" },
+    { value: 203, label: "Room 203" },
+    { value: 204, label: "Room 204" },
+    { value: 205, label: "Room 205" },
+    { value: 206, label: "Room 206" },
+    { value: 207, label: "Room 207" },
+    { value: 302, label: "Room 302" },
+    { value: 303, label: "Room 303" },
+    { value: 304, label: "Room 304" },
+    { value: 305, label: "Room 305" },
+    { value: 306, label: "Room 306" },
+    { value: 307, label: "Room 307" },
+    { value: 402, label: "Room 402" },
+    { value: 403, label: "Room 403" },
+    { value: 404, label: "Room 404" },
+    { value: 405, label: "Room 405" },
+    { value: 406, label: "Room 406" },
+    { value: 407, label: "Room 407" },
+    { value: 501, label: "Room 501" },
+    { value: 502, label: "Room 502" },
+    { value: 503, label: "Room 503" },
+    { value: 504, label: "Room 504" },
+    { value: 505, label: "Room 505" },
+    { value: 506, label: "Room 506" },
+    { value: 507, label: "Room 507" },
+    { value: 508, label: "Room 508" },
+    { value: 509, label: "Room 509" },
+    { value: 601, label: " Room601" },
+    { value: 602, label: " Room602" },
+    { value: 603, label: " Room603" },
+    { value: 604, label: " Room604" },
+    // Add more rooms as needed
+  ];
+
+
 const AdditionalStudentDataForm = () => {
   useTitle('Submit Student Data');
   const navigate = useNavigate();
+  useTitle('Submit Student Data');
   const [photo, setPhoto] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [availableRooms, setAvailableRooms] = useState([]);
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setUserName] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -37,19 +74,6 @@ const AdditionalStudentDataForm = () => {
     { value: "Feni Ideal Polytechnic Institute - FIPI", label: "Feni Ideal Polytechnic Institute - FIPI" },
     { value: "Feni Government Technical School and College", label: "Feni Government Technical School and College" },
   ];
-
-  useEffect(() => {
-    const fetchRoomData = async () => {
-      try {
-        const rooms = await fetchRooms();
-        setAvailableRooms(rooms || []);
-      } catch (error) {
-        setAvailableRooms([]);
-        toast.error("Failed to load available rooms.");
-      }
-    };
-    fetchRoomData();
-  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -183,12 +207,9 @@ const AdditionalStudentDataForm = () => {
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Room Number</label>
         <Select
-          options={availableRooms.map((room) => ({
-            value: room.room_number,
-            label: `Room ${room.room_number}`,
-          }))}
+          options={roomOptions}
           onChange={(selectedOption) =>
-            setFormData({ ...formData, roomNumber: selectedOption?.value })
+            setFormData({ ...formData, roomNumber: selectedOption.value })
           }
           className="mt-1 rounded-md"
           placeholder="Select Room"

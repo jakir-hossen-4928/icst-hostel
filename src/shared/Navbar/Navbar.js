@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
-import { logoutUser,getUserData } from "../../backend/appwrite";
+import { logoutUser, getUserData, checkUserProfileExists } from "../../backend/appwrite";
 
 const Navbar = () => {
   const { user, isAdmin, clearUserState } = useContext(AuthContext);
@@ -9,15 +9,22 @@ const Navbar = () => {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [profileExists, setProfileExists] = useState(false); // State for profile existence
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-   // Fetch user data from Appwrite on component mount
-   useEffect(() => {
+  // Fetch user data and check if profile exists on component mount
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         const data = await getUserData();
-        setUserData(data);  // Store fetched user data
+        setUserData(data); // Store fetched user data
+
+        // Check if student profile exists
+        if (data && data.userId) {
+          const exists = await checkUserProfileExists(data.userId);
+          setProfileExists(exists); // Set profile existence based on check
+        }
       } catch (error) {
         console.error('Error fetching user data:', error);
       } finally {
@@ -67,11 +74,18 @@ const Navbar = () => {
         <Link to="/contact">Contact</Link>
       </li>
       {user ? (
-        <li>
-          <Link to={isAdmin ? "/dashboard" : "/studentdashboard"}>
-            Dashboard
-          </Link>
-        </li>
+        <>
+          {/* Commented out dashboard link */}
+          {/* <li>
+            <Link to={isAdmin ? "/dashboard" : "/"}>Dashboard</Link>
+          </li> */}
+          {/* Uncomment below when ready to show studentdashboard link */}
+          {/* {profileExists ? (
+            <li>
+              <Link to="/studentdashboard">Student Dashboard</Link>
+            </li>
+          ) : null} */}
+        </>
       ) : (
         <li>
           <Link to="/login">Login</Link>
@@ -79,6 +93,7 @@ const Navbar = () => {
       )}
     </React.Fragment>
   );
+
 
   return (
     <div className="navbar bg-gray-200">
@@ -124,14 +139,14 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-16 rounded-full bg-slate-600">
-              <img
-              src={userData?.photo || "https://ln.run/xHwDq"}
-              alt={userData?.name || "User Profile"}
-              className="w-28 h-28 rounded-full border-4 border-black"
-            />
+                <img
+                  src={userData?.photo || "https://ln.run/xHwDq"}
+                  alt={userData?.name || "User Profile"}
+                  className="w-28 h-28 rounded-full border-4 border-black"
+                />
               </div>
             </label>
-            <ul className="dropdown-content menu p-1 shadow  rounded-box">
+            <ul className="dropdown-content menu p-1 shadow rounded-box">
               <li>
                 {isLoggingOut ? (
                   // Show spinner when logging out

@@ -9,6 +9,7 @@ import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
     useTitle("Log-In");
+    const teamId = process.env.REACT_APP_TEAM_ID;
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { fetchUser } = useContext(AuthContext);
     const location = useLocation();
@@ -32,7 +33,7 @@ const Login = () => {
             const userProfileExists = await checkUserProfileExists(user.$id);
 
             // Fetch roles for the team
-            const roles = await getUserRoleInTeam('6707cf82000f24efd40b');
+            const roles = await getUserRoleInTeam(teamId);
 
             // Check user roles and navigate accordingly
             if (roles.includes("admin")) {

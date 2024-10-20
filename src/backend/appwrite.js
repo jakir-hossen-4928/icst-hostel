@@ -11,15 +11,36 @@ const databases = new Databases(client);
 const teams = new Teams(client);
 const storage = new Storage(client); // Use Storage class properly
 
-const teamId = '6707cf82000f24efd40b';
-const databaseId = '670635f7000be0ec2a79';
-const studentsCollectionId = '670bd9f3001feac3ace4';
-const feedbackCollectionId = '670bdbcd0014621ad120';
-const contactCollectionId = '670be05f000d320b6670';
-const roomsCollectionId = '670bdcd50005f13344fa';
-const noticesCollectionId = '670bdab20027d85c6d79';
-const menagmentCostsCollectionId = '670cfbd6001a79f1ee7a';
-const hostelmealfeeCollectionId = '670bdcb1001268d98675';
+const teamId = process.env.REACT_APP_TEAM_ID;
+const databaseId = process.env.REACT_APP_APPWRITE_DATABASE_ID;
+const studentsCollectionId = process.env.REACT_APP_APPWRITE_STUDENTS_COLLECTION_ID;
+const feedbackCollectionId = process.env.REACT_APP_APPWRITE_ADVISE_COMPLAIN_COLLECTION_ID;
+const contactCollectionId = process.env.REACT_APP_APPWRITE_CONTACT_COLLECTION_ID;
+const roomsCollectionId = process.env.REACT_APP_APPWRITE_ROOMS_SETS_COLLECTION_ID;
+const noticesCollectionId = process.env.REACT_APP_APPWRITE_NOTICE_COLLECTION_ID;
+const menagmentCostsCollectionId = process.env.REACT_APP_APPWRITE_MENAGMENT_COSTS_COLLECTION_ID;
+const hostelmealfeeCollectionId = process.env.REACT_APP_APPWRITE_HOSTEL_MEAL_FEE_COLLECTION_ID;
+
+const noticeImagesBucketId = process.env.REACT_APP_APPWRITE_NOTICE_IMAGES_BUCKET_ID;
+const studentImagesBucketId = process.env.REACT_APP_APPWRITE_USER_PHOTOS_BUCKET_ID;
+
+
+
+// console.log('Endpoint:', process.env.REACT_APP_APPWRITE_ENDPOINT);
+// console.log('Project ID:', process.env.REACT_APP_APPWRITE_PROJECT_ID);
+// console.log('Database ID:', databaseId);
+// console.log('Students Collection ID:', studentsCollectionId);
+// console.log('notices Collection ID:', noticesCollectionId);
+// console.log('contact Collection ID:', contactCollectionId);
+// console.log('hostelmealfee Collection ID:', hostelmealfeeCollectionId );
+// console.log('feedback Collection Id Collection ID:', feedbackCollectionId);
+// console.log('rooms Collection ID:', roomsCollectionId);
+// console.log('manegments costs Collection ID:', menagmentCostsCollectionId);
+// console.log('Notice Images Bucket ID:', noticeImagesBucketId);
+// console.log('Student Images Bucket ID:', studentImagesBucketId);
+// console.log('imgbb API Key:', process.env.REACT_APP_imgbb_key);
+
+
 
 
 const hostelFixedFee = 1500;
@@ -33,14 +54,6 @@ const extractMonthYear = (sheetsData) => {
 const generateStudentId = () => {
     return Math.random().toString(36).substring(2, 8).toUpperCase();
 };
-console.log('Database ID:', databaseId);
-console.log('Students Collection ID:', studentsCollectionId);
-
-
-
-const noticeImagesBucketId = process.env.REACT_APP_APPWRITE_NOTICE_IMAGES_BUCKET_ID;
-const studentImagesBucketId = process.env.REACT_APP_APPWRITE_USER_PHOTOS_BUCKET_ID;
-
 
 
 

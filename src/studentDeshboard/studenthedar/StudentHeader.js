@@ -71,7 +71,7 @@ const StudentHeader = () => {
           <div className="flex-1">
             <Link to="/studentdashboard" className="block py-5">
               <span className="font-bold text-2xl lg:text-3xl text-white">
-                Student Dashboard
+                {user?.name || "Dashboard"}
               </span>
             </Link>
           </div>
@@ -116,7 +116,12 @@ const StudentHeader = () => {
                   {profileMenuOpen && (
                     <div className="profile-menu absolute right-0 z-10 mt-2 w-48 bg-white rounded-md shadow-lg">
                       <div className="py-2">
-                      <Link to='/studentdashboard/profile' className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
+                        <Link
+                          to="/studentdashboard/profile"
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Profile
+                        </Link>
                         <button
                           onClick={handleLogout}
                           disabled={isLoggingOut}
@@ -128,8 +133,7 @@ const StudentHeader = () => {
                         >
                           {isLoggingOut ? (
                             <>
-                              <span className="loading-spinner"></span>{" "}
-                              Logging out...
+                              <span className="loading-spinner"></span> Logging out...
                             </>
                           ) : (
                             "Log out"
@@ -182,6 +186,15 @@ const StudentHeader = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/studentdashboard/profile"
+                  onClick={handleMobileLinkClick}
+                  className="text-white font-semibold transition hover:text-gray-200"
+                >
+                  {"Profile"}
+                </Link>
+              </li>
               <li>
                 <button
                   disabled={isLoggingOut}

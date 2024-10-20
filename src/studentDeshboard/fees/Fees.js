@@ -28,6 +28,7 @@ const studentsData = [
 
 const Fees = () => {
   useTitle('Your Fees')
+  const [isComingSoon, setIsComingSoon] = useState(true);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedFeeType, setSelectedFeeType] = useState(''); // 'Hostel Fee' or 'Meal Fee'
   const [selectedMonth, setSelectedMonth] = useState(''); // The selected month for payment
@@ -66,7 +67,22 @@ const Fees = () => {
 
   return (
     <div className="container mx-auto p-6 bg-gray-50">
-   
+
+{isComingSoon && (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 ">
+  <div className="bg-white shadow-md rounded-lg p-6 text-center z-60 m-3">
+    <h2 className="text-2xl font-semibold text-indigo-600">Coming Soon!</h2>
+    <p className="mt-4 text-gray-600">This feature is currently under development. Please check back later.</p>
+    <button
+      onClick={() => setIsComingSoon(false)} // Assuming you have a way to close this modal
+      className="mt-4 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg"
+    >
+      Close
+    </button>
+  </div>
+</div>
+
+      )}
 
       {studentsData.map((student) => (
         <div key={student.student_id} className="bg-white shadow-md rounded-lg mb-8 p-6 transition-all duration-300 hover:shadow-lg">
@@ -218,6 +234,8 @@ const Fees = () => {
           <label className="modal-backdrop" onClick={() => setIsModalOpen(false)}></label>
         </div>
       )}
+
+
     </div>
   );
 };

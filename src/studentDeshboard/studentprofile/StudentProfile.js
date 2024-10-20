@@ -11,7 +11,10 @@ import {
 } from "../../backend/appwrite"; // Removed upload and delete functions
 import useTitle from "../../shared/useTitle/useTitle";
 
-const imageHostKey = "8214c397d8d128581e7bb4f84f230a86";
+const imageHostKey = process.env.REACT_APP_imgbb_key;
+
+console.log('Image Host Key:', imageHostKey);
+
 
 const StudentProfile = () => {
   useTitle("Profile");
@@ -64,6 +67,9 @@ const StudentProfile = () => {
     { value: 508, label: "Room 508" },
     { value: 509, label: "Room 509" },
     { value: 601, label: " Room601" },
+    { value: 602, label: " Room602" },
+    { value: 603, label: " Room603" },
+    { value: 604, label: " Room604" },
     // Add more rooms as needed
   ];
 
