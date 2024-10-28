@@ -34,7 +34,7 @@ const studentImagesBucketId = process.env.REACT_APP_APPWRITE_USER_PHOTOS_BUCKET_
 // console.log('contact Collection ID:', contactCollectionId);
 // console.log('hostelmealfee Collection ID:', hostelmealfeeCollectionId );
 // console.log('feedback Collection Id Collection ID:', feedbackCollectionId);
-// console.log('rooms Collection ID:', roomsCollectionId);
+console.log('rooms Collection ID:', roomsCollectionId);
 // console.log('manegments costs Collection ID:', menagmentCostsCollectionId);
 // console.log('Notice Images Bucket ID:', noticeImagesBucketId);
 // console.log('Student Images Bucket ID:', studentImagesBucketId);
