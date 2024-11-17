@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Icst-Hostel 🏠
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to **Icst-Hostel**, a comprehensive **Hostel Management System** designed for polytechnic students. 🎓 This project helps students and administrators manage hostel-related tasks with ease. 🚀
 
-## Available Scripts
+## 📌 Features
 
-In the project directory, you can run:
+### 🌟 **For Students:**
+- **Student Dashboard** 🖥️
+  - Track personal profile 📋
+  - Access **Notice Board** 📢
+  - Apply for advice/complaints 💬
+  - View **Fees Details** 💵
+  - Download your **ID Card** 🆔
+- **Student Registration** 📝
+  - Complete additional student data form for profile setup.
 
-### `npm start`
+### 🌟 **For Admin:**
+- **Admin Dashboard** 🖥️
+  - **Search Student Info** 🔍
+  - **Add/Update Notices** 🗞️
+  - **Room Management** 🏠
+    - Manage room maps, occupancy, and assignments 🛏️
+  - **Management Costs** 💰
+  - **Google Sheets Upload** 📊
+    - Upload and manage student data and fees information easily.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🌟 **General Features:**
+- **Private Routes** 🔒
+  - Access restricted areas based on authentication and role (Student/Admin) 🔑
+- **Authentication** 🛡️
+  - User login, sign-up, and password recovery 🔐
+- **Responsive Design** 📱
+  - Optimized for mobile and desktop usage 📏
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 💻 Tech Stack
 
-### `npm test`
+- **Frontend:** React 🧩, React Router 🛣️, Tailwind CSS 🎨
+- **Backend:** Appwrite 🖥️
+- **Routing:** React Router for navigation 🧭
+- **Authentication:** JWT Tokens 🔑
+- **State Management:** Context API 🌍
+- **Database:** Appwrite Database 📚
+- **File Uploads:** File upload components for room maps, notices, etc. 📁
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Installation
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/Icst-Hostel.git
