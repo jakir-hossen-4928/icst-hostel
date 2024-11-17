@@ -4,18 +4,18 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { setNewPassword } from '../../backend/appwrite';
 import { toast } from 'react-hot-toast';
 import useTitle from '../useTitle/useTitle';
+import { Eye, EyeOff } from 'lucide-react';
 
 const SetNewPassword = () => {
   useTitle("Set New Password");
   const { register, handleSubmit, formState: { errors }, getValues } = useForm();
   const [resetError, setResetError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false); // State for new password visibility
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State for confirm password visibility
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Extract userId and secret from the URL
   const params = new URLSearchParams(location.search);
   const userId = params.get("userId");
   const secret = params.get("secret");
@@ -26,7 +26,7 @@ const SetNewPassword = () => {
     try {
       await setNewPassword(userId, secret, data.newPassword, data.confirmPassword);
       toast.success("Password reset successfully!");
-      navigate("/login"); // Redirect to login after successful reset
+      navigate("/login");
     } catch (error) {
       setResetError("Failed to reset the password. Please try again.");
       toast.error("Failed to reset password.");
@@ -36,79 +36,125 @@ const SetNewPassword = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "rgba(235, 241, 252)" }} className="py-20 min-h-screen">
-      <section className="flex flex-col max-w-4xl mx-auto overflow-hidden md:rounded-lg md:shadow-lg md:flex-row md:h-48">
-        <div className="md:flex md:items-center md:justify-center md:w-1/2 md:bg-gray-700">
-          <div className="px-6 py-6 md:px-8 md:py-0">
-            <h2 className="text-lg font-bold text-white">
-              <span className="text-gray-300">Set your new password</span>
+    <section className="min-h-screen bg-gray-50">
+      <div className="flex flex-col items-center justify-center px-4 py-8 mx-auto min-h-screen">
+        <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="bg-gray-800 px-8 py-6">
+            <h2 className="text-xl font-bold text-white">
+              Set New Password
             </h2>
+            <p className="text-gray-300 text-sm mt-2">
+              Choose a strong password for your account
+            </p>
           </div>
-        </div>
 
-        <div className="flex items-center justify-center pb-6 md:py-0 md:w-1/2 md:bg-white">
-          <form onSubmit={handleSubmit(handleSetNewPassword)} className="w-full px-4 py-6">
-            <div className="flex flex-col space-y-4">
+          <div className="p-8 space-y-6">
+            <form onSubmit={handleSubmit(handleSetNewPassword)} className="space-y-6">
               {/* New Password Field */}
-              <div className="flex flex-col relative">
-                <input
-                  className="px-6 py-2 text-black placeholder-gray-500 bg-white rounded-lg outline-none transition duration-200 focus:ring-2 focus:ring-blue-500 border"
-                  type={showNewPassword ? "text" : "password"}
-                  {...register("newPassword", {
-                    required: "New password is required",
-                    minLength: { value: 6, message: "Password must be at least 6 characters" },
-                  })}
-                  placeholder="Enter your new password"
-                />
-                <span
-                  onClick={() => setShowNewPassword(prev => !prev)}
-                  className="absolute right-4 top-2 cursor-pointer"
-                >
-                  {showNewPassword ? '👁️' : '👁‍🗨'} {/* Eye icon */}
-                </span>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  New Password
+                </label>
+                <div className="relative">
+                  <input
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500"
+                    type={showNewPassword ? "text" : "password"}
+                    {...register("newPassword", {
+                      required: "New password is required",
+                      // minLength: {
+                      //   value: 6,
+                      //   message: "Password must be at least 6 characters"
+                      // },
+                      // pattern: {
+                      //   value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+                      //   message: "Password must contain at least one letter, one number and one special character"
+                      // }
+                    })}
+                    placeholder="Enter your new password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(prev => !prev)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    aria-label={showNewPassword ? "Hide password" : "Show password"}
+                  >
+                    {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
                 {errors.newPassword && (
-                  <p className="text-red-600 text-sm mt-1">{errors.newPassword.message}</p>
+                  <p className="text-sm text-red-600">{errors.newPassword.message}</p>
                 )}
               </div>
 
               {/* Confirm Password Field */}
-              <div className="flex flex-col relative">
-                <input
-                  className="px-6 py-2 text-black placeholder-gray-500 bg-white rounded-lg outline-none transition duration-200 focus:ring-2 focus:ring-blue-500 border"
-                  type={showConfirmPassword ? "text" : "password"}
-                  {...register("confirmPassword", {
-                    required: "Please confirm your password",
-                    validate: (value) => value === getValues('newPassword') || "Passwords do not match",
-                  })}
-                  placeholder="Confirm your new password"
-                />
-                <span
-                  onClick={() => setShowConfirmPassword(prev => !prev)}
-                  className="absolute right-4 top-2 cursor-pointer"
-                >
-                  {showConfirmPassword ? '👁️' : '👁‍🗨'} {/* Eye icon */}
-                </span>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <input
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500"
+                    type={showConfirmPassword ? "text" : "password"}
+                    {...register("confirmPassword", {
+                      required: "Please confirm your password",
+                      validate: (value) => value === getValues('newPassword') || "Passwords do not match"
+                    })}
+                    placeholder="Confirm your new password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(prev => !prev)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                  >
+                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
                 {errors.confirmPassword && (
-                  <p className="text-red-600 text-sm mt-1">{errors.confirmPassword.message}</p>
+                  <p className="text-sm text-red-600">{errors.confirmPassword.message}</p>
                 )}
               </div>
 
+              {/* Password Requirements */}
+              <div className="space-y-2 text-sm text-gray-600">
+                <p className="font-medium">Password requirements:</p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>At least 6 characters long</li>
+                  <li>Contains at least one letter</li>
+                  <li>Contains at least one number</li>
+                  <li>Contains at least one special character (@$!%*#?&)</li>
+                </ul>
+              </div>
+
               <button
-                className={`px-4 py-3 text-sm font-medium tracking-wider text-white uppercase transition-colors duration-300 transform bg-slate-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 type="submit"
                 disabled={loading}
+                className={`w-full px-4 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors
+                  ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                {loading ? 'Setting Password...' : 'Set Password'}
+                {loading ? (
+                  <span className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Setting New Password...
+                  </span>
+                ) : (
+                  'Set New Password'
+                )}
               </button>
-            </div>
+            </form>
 
             {resetError && (
-              <p className="text-red-600 py-3">{resetError}</p>
+              <div className="p-4 text-sm text-red-600 bg-red-50 rounded-lg">
+                {resetError}
+              </div>
             )}
-          </form>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

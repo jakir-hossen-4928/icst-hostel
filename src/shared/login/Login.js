@@ -61,72 +61,92 @@ const Login = () => {
     };
 
     return (
-        <section style={{ backgroundColor: "rgba(235, 241, 252)" }}>
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 min-h-screen">
-                <div className="p-7 bg-white border rounded-lg shadow-lg relative">
-                    <h2 className="text-xl text-center mb-4">Login</h2>
+<section className="min-h-screen bg-gray-50">
+  <div className="flex flex-col items-center justify-center px-4 py-8 mx-auto min-h-screen">
+    <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-lg space-y-6">
+      <h2 className="text-2xl font-bold text-center text-gray-800">Welcome Back</h2>
 
-                    <form onSubmit={handleSubmit(handleLogin)}>
-                        <div className="form-control w-full max-w-xs">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input
-                                type="email"
-                                {...register("email", { required: "Email Address is required" })}
-                                className="input input-bordered w-full max-w-xs"
-                            />
-                            {errors.email && <p className="text-red-600">{errors.email?.message}</p>}
-                        </div>
+      <form onSubmit={handleSubmit(handleLogin)} className="space-y-6">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Email Address
+          </label>
+          <input
+            type="email"
+            {...register("email", { required: "Email Address is required" })}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter your email"
+          />
+          {errors.email &&
+            <p className="text-sm text-red-600 mt-1">{errors.email?.message}</p>
+          }
+        </div>
 
-                        <div className="form-control w-full max-w-xs relative">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                {...register("password", { required: "Password is required" })}
-                                className="input input-bordered w-full max-w-xs"
-                            />
-                            <span
-                                onClick={() => setShowPassword(prev => !prev)}
-                                className="absolute right-4 top-10 cursor-pointer"
-                            >
-                                {showPassword ? '👁️' : '👁‍🗨'}
-                            </span>
-                            {errors.password && <p className="text-red-600">{errors.password?.message}</p>}
-                        </div>
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Password
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("password", { required: "Password is required" })}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter your password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(prev => !prev)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? '👁️' : '👁‍🗨'}
+            </button>
+          </div>
+          {errors.password &&
+            <p className="text-sm text-red-600 mt-1">{errors.password?.message}</p>
+          }
+        </div>
 
-                        {/* Flex container for Remember Me and Forget Password */}
-                        <div className="flex items-center justify-between w-full max-w-xs mt-4">
-                            <label className="cursor-pointer label flex items-center">
-                                <input
-                                    type="checkbox"
-                                    className="checkbox"
-                                    checked={rememberMe}
-                                    onChange={() => setRememberMe(prev => !prev)}
-                                />
-                                <span className="label-text ml-2">Remember Me</span>
-                            </label>
-                            <Link to="/forgetpassword" className="label-text text-blue-500 hover:underline">Forget Password?</Link>
-                        </div>
+        <div className="flex items-center justify-between">
+          <label className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={() => setRememberMe(prev => !prev)}
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <span className="text-sm text-gray-600">Remember me</span>
+          </label>
+          <Link
+            to="/forgetpassword"
+            className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+          >
+            Forgot Password?
+          </Link>
+        </div>
 
-                        <input
-                            className={`btn text-white w-full bg-slate-700 ${isLoggingIn ? 'opacity-50 cursor-not-allowed' : ''}`}
-                            value={isLoggingIn ? "Logging In..." : "Login"}
-                            type="submit"
-                            disabled={isLoggingIn}
-                        />
-                    </form>
+        <button
+          type="submit"
+          disabled={isLoggingIn}
+          className={`w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors
+            ${isLoggingIn ? 'opacity-50 cursor-not-allowed' : ''}`}
+        >
+          {isLoggingIn ? "Logging In..." : "Login"}
+        </button>
+      </form>
 
-                    <p>
-                        New to Website?{" "}
-                        <Link className="text-secondary" to="/signup">Create new Account</Link>
-                    </p>
-                </div>
-            </div>
-            <ToastContainer />
-        </section>
+      <p className="text-center text-sm text-gray-600">
+        New to Website?{" "}
+        <Link
+          to="/signup"
+          className="text-blue-600 hover:text-blue-800 hover:underline"
+        >
+          Create new Account
+        </Link>
+      </p>
+    </div>
+  </div>
+  <ToastContainer />
+</section>
     );
 };
 

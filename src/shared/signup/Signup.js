@@ -73,109 +73,126 @@ const Signup = () => {
   };
 
   return (
-    <section style={{ backgroundColor: "rgba(235, 241, 252)" }}>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 min-h-screen">
-        <div className="p-7 bg-white border rounded-lg shadow-lg">
-          <h2 className="text-xl text-center">Sign Up</h2>
-          <form onSubmit={handleSubmit(handleSignUp)}>
-            {/* Name Field */}
-            <div className="form-control w-full max-w-xs md:max-w-full">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                type="text"
-                {...register("name", {
-                  required: "Name is required",
-                  validate: (value) =>
-                    value.trim() !== "" || "Name cannot be empty",
-                })}
-                className="input input-bordered w-full"
-              />
-              {errors.name && (
-                <p className="text-red-500">{errors.name.message}</p>
-              )}
-            </div>
+<section className="min-h-screen bg-gray-50">
+  <div className="flex flex-col items-center justify-center px-4 py-8 mx-auto min-h-screen">
+    <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-lg space-y-6">
+      <h2 className="text-2xl font-bold text-center text-gray-800">Create Account</h2>
 
-            {/* Email Field */}
-            <div className="form-control w-full max-w-xs md:max-w-full">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                className="input input-bordered w-full"
-                type="email"
-                {...register("email", {
-                  required: "Email Address is required",
-                  pattern:
-                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                })}
-              />
-              {errors.email && (
-                <p className="text-red-600">{errors.email.message}</p>
-              )}
-            </div>
-
-            {/* Password Field */}
-            <div className="form-control w-full max-w-xs md:max-w-full relative">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type={showPassword ? "text" : "password"}
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be 6 characters or longer",
-                  },
-                  validate: {
-                    hasUppercase: (value) =>
-                      /[A-Z]/.test(value) ||
-                      "Password must have at least one uppercase letter.",
-                    hasNumber: (value) =>
-                      /\d/.test(value) ||
-                      "Password must have at least one number.",
-                    hasSpecialChar: (value) =>
-                      /[!@#$%^&*]/.test(value) ||
-                      "Password must have at least one special character (!@#$%^&*).",
-                  },
-                })}
-                className="input input-bordered w-full"
-              />
-              <span
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute right-4 top-10 cursor-pointer"
-              >
-                {showPassword ? "👁️" : "👁‍🗨"} {/* Eye icon */}
-              </span>
-              {errors.password && (
-                <p className="text-green-600 text-sm mt-1">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-
-            <input
-              className={`btn text-white bg-slate-700 w-full mt-4 ${
-                isSigningUp ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              value={isSigningUp ? "Processing..." : "Next ➡ "}
-              type="submit"
-              disabled={isSigningUp}
-            />
-          </form>
-
-          <p>
-            Already have an Account?
-            <Link className="text-secondary p-2" to="/login">
-              Please Login
-            </Link>
-          </p>
+      <form onSubmit={handleSubmit(handleSignUp)} className="space-y-6">
+        {/* Name Field */}
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Full Name
+          </label>
+          <input
+            type="text"
+            {...register("name", {
+              required: "Name is required",
+              validate: (value) => value.trim() !== "" || "Name cannot be empty",
+            })}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter your full name"
+          />
+          {errors.name && (
+            <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>
+          )}
         </div>
-      </div>
-      <ToastContainer /> {/* ToastContainer for toast notifications */}
-    </section>
+
+        {/* Email Field */}
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Email Address
+          </label>
+          <input
+            type="email"
+            {...register("email", {
+              required: "Email Address is required",
+              pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            })}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter your email"
+          />
+          {errors.email && (
+            <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
+          )}
+        </div>
+
+        {/* Password Field */}
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Password
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be 6 characters or longer",
+                },
+                validate: {
+                  hasUppercase: (value) =>
+                    /[A-Z]/.test(value) ||
+                    "Password must have at least one uppercase letter.",
+                  hasNumber: (value) =>
+                    /\d/.test(value) ||
+                    "Password must have at least one number.",
+                  hasSpecialChar: (value) =>
+                    /[!@#$%^&*]/.test(value) ||
+                    "Password must have at least one special character (!@#$%^&*).",
+                },
+              })}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Create a strong password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(prev => !prev)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? '👁️' : '👁‍🗨'}
+            </button>
+          </div>
+          {errors.password && (
+            <p className="text-sm text-amber-600 mt-1">{errors.password.message}</p>
+          )}
+        </div>
+
+        {/* Password Requirements */}
+        <div className="text-xs text-gray-600 space-y-1">
+          <p>Password must contain:</p>
+          <ul className="list-disc pl-4 space-y-1">
+            <li>At least 6 characters</li>
+            <li>One uppercase letter</li>
+            <li>One number</li>
+            <li>One special character (!@#$%^&*)</li>
+          </ul>
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSigningUp}
+          className={`w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors
+            ${isSigningUp ? 'opacity-50 cursor-not-allowed' : ''}`}
+        >
+          {isSigningUp ? "Creating Account..." : "Create Account"}
+        </button>
+      </form>
+
+      <p className="text-center text-sm text-gray-600">
+        Already have an account?{" "}
+        <Link
+          to="/login"
+          className="text-blue-600 hover:text-blue-800 hover:underline"
+        >
+          Log in
+        </Link>
+      </p>
+    </div>
+  </div>
+  <ToastContainer />
+</section>
   );
 };
 
