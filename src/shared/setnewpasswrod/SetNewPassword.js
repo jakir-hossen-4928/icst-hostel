@@ -36,8 +36,8 @@ const SetNewPassword = () => {
   };
 
   return (
-    <section className="min-h-screen bg-gray-50">
-      <div className="flex flex-col items-center justify-center px-4 py-8 mx-auto min-h-screen">
+    <section className=" bg-gray-50">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="bg-gray-800 px-8 py-6">
             <h2 className="text-xl font-bold text-white">
@@ -61,14 +61,14 @@ const SetNewPassword = () => {
                     type={showNewPassword ? "text" : "password"}
                     {...register("newPassword", {
                       required: "New password is required",
-                      // minLength: {
-                      //   value: 6,
-                      //   message: "Password must be at least 6 characters"
-                      // },
-                      // pattern: {
-                      //   value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-                      //   message: "Password must contain at least one letter, one number and one special character"
-                      // }
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters"
+                      },
+                      pattern: {
+                        value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+                        message: "Password must contain at least one letter, one number and one special character"
+                      }
                     })}
                     placeholder="Enter your new password"
                   />
